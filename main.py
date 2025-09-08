@@ -12,10 +12,10 @@ def home_page():
     show_home_page()
 
     ui.label("Welcome to the Main Page")
-    ui.button("Go to Home Page", on_click=lambda: app.open("/home"))
-    ui.button("Go to Add Event Page", on_click=lambda: app.open("/add_event"))
-    ui.button("Go to Edit Event Page", on_click=lambda: app.open("/edit_event"))
-    ui.button("Go to View Event Page", on_click=lambda: app.open("/view_event"))
+    ui.button("Go to Home Page", on_click=lambda: ui.open("/home"))
+    ui.button("Go to Add Event Page", on_click=lambda: ui.open("/add_event"))
+    ui.button("Go to Edit Event Page", on_click=lambda: ui.open("/edit_event"))
+    ui.button("Go to View Event Page", on_click=lambda: ui.open("/view_event"))
 
 
 @ui.page("/home")
