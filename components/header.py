@@ -4,8 +4,8 @@ from pages.home import show_home_page as home_page
 
 def show_header():
     with ui.row():
-        ui.button("Home", on_click=lambda: ui.open("/home"))
-        ui.button("Add Event", on_click=lambda: ui.open("/add_event"))
-        ui.button("View Event", on_click=lambda: ui.open("/view_event"))
-        ui.button("Edit Event", on_click=lambda: ui.open("/edit_event"))
-        ui.button("Log Out", on_click=lambda: ui.open("/"))
+        ui.link("Home", "/home")
+        ui.link("Add Event", "/add_event")
+        ui.link("View Event", "/view_event")
+        ui.link("Edit Event", "/edit_event")
+        ui.link("Log Out", "/")
