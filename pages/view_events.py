@@ -95,8 +95,8 @@ ads = [
 ]
 
 
-@ui.page("/")
-def show_event_page():
+
+def show_view_events_page():
     # full-page wrapper with background
     with ui.element("div").classes(
         "min-h-screen w-full bg-gray-100 flex flex-col items-center p-10"
