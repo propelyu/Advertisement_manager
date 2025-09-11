@@ -1,0 +1,1 @@
+base_url = "https://propelyu-advertisement-api.onrender.com"
