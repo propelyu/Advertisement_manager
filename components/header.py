@@ -2,7 +2,7 @@ from nicegui import ui
 
 def show_header():
      with ui.element("header").classes(
-        "w-full fixed top-0 left-0 z-50 shadow-2xl shadow-orange-200 "
+        "w-full fixed top-0 left-0 z-50 shadow-2xl shadow-orange-50"
     ):
         with ui.row().classes(
             "flex justify-between items-center w-full h-20 px-8"
@@ -13,6 +13,7 @@ def show_header():
                 ui.html("PROPEL").classes(
         "text-stone font-bold text-3xl text-white uppercase"
     ).style('font-family: "Story Script", sans-serif')
+                # ui.icon("home").classes("text-amber-400 w-8 h-8") 
 
 
 
@@ -20,16 +21,16 @@ def show_header():
             # Navigation links
             with ui.row().classes("flex justify-center items-center space-x-6 mr-4"):
                 ui.link("Home", "/home").classes(
-                    "text-white text-lg hover:text-orange-400 transition-colors uppercase no-underline "
+                    "text-amber-400 text-lg hover:text-orange-400 transition-colors uppercase no-underline "
                 )
                 ui.link("Add Event", "/add_event").classes(
-                    "text-white text-lg hover:text-orange-500 transition-colors uppercase no-underline "
+                    "text-amber-400 text-lg hover:text-orange-500 transition-colors uppercase no-underline "
                 )
                 ui.link("View Event", "/view_event").classes(
-                    "text-white text-lg hover:text-orange-500 transition-colors uppercase no-underline "
+                    "text-amber-400 text-lg hover:text-orange-500 transition-colors uppercase no-underline "
                 )
                 ui.link("Edit Event", "/edit_event").classes(
-                    "text-white text-lg hover:text-orange-500 transition-colors uppercase no-underline "
+                    "text-amber-400 text-lg hover:text-orange-500 transition-colors uppercase no-underline "
                 )
                 ui.button("Log Out") \
                     .props("flat") \

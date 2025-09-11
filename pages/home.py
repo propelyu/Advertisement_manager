@@ -2,10 +2,6 @@ from nicegui import ui
 import requests
 from utils.api import base_url
 
-# Optional: if your images are local, serve assets
-# from nicegui import app
-# app.add_static_files('/assets', 'path/to/assets')
-
 # Sample property data
 properties = []
 
@@ -22,6 +18,11 @@ ui.add_head_html('''
 
 @ui.page('/')
 def show_home_page():
+    response = requests.get(f"{base_url}/adverts")
+    json_data = response.json()
+    # print(json_data)
+    properties = json_data["data"]
+    
     ui.query('.nicegui-content').classes('m-0 p-0')
 
     # Hero
@@ -34,21 +35,21 @@ def show_home_page():
         ui.label('Find your dream property today') \
           .classes('text-lg text-white mb-2') \
           .style('color: gold; text-shadow: 0 0 5px #FFD700, 0 0 10px #FFA500;')
-
+        
     # Listing
-    with ui.element('section').classes('w-full py-12 bg-gray-50'):
-        with ui.element('div').classes('mx-auto max-w-7xl w-full px-6'):
+    with ui.element('section').classes('w-full py-12 bg-gray-50 '):
+        with ui.element('div').classes('mx-auto max-w-7xl w-full px-6 '):
             ui.label('Featured Properties').classes('text-2xl font-bold mb-8 text-center')
 
             with ui.row().classes('w-full justify-center gap-8 flex-wrap'):
                 for idx, prop in enumerate(properties):
                     # Make the card relative so the badge can be absolutely positioned on top-right
                     with ui.element('div').classes(
-                        'property-card w-96 shadow-xl transition-shadow duration-300 relative'
+                        'property-card w-96 shadow-xl transition-shadow duration-300 relative hover:scale-105 rounded-2xl'
                     ).props('role=link tabindex=0 aria-label="View property"') as card:
-                        card.on('click', lambda e, i=idx: ui.navigate.to(f'/property/{i}'))
+                        card.on('click', lambda i=prop["id"]: ui.navigate.to(f'/view_event?id={i}'))
 
-                        # Category badge (top-right of the card)
+                        # Category badge
                         if prop.get('category'):
                             ui.label(prop['category']).classes(
                                 'absolute top-2 right-2 z-10 text-xs bg-orange-100 text-orange-700 '
@@ -58,14 +59,14 @@ def show_home_page():
                         # Image
                         with ui.element('div').classes('property-image-wrap'):
                             ui.element('img').classes('property-image').props(
-                                f'src="{prop["image"]}" alt="{prop["title"]}"'
+                                f'src="{prop["image_url"]}" alt="{prop["title"]}"'
                             )
 
-                        # Content (left aligned)
+                        # Content
                         with ui.element('div').classes('p-4 text-left'):
                             ui.label(prop['title']).classes('text-xl font-bold text-left')
                             with ui.row().classes('items-center justify-between w-full'):
-                                ui.label(prop['location']).classes('text-sm text-gray-500 text-left')
+                                # ui.label(prop['location']).classes('text-sm text-gray-500 text-left')
                                 ui.label(prop['price']).classes('text-lg text-green-600 font-semibold text-left')
 
 @ui.page('/property/{prop_id}')
