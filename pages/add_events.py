@@ -16,8 +16,8 @@ def show_add_event_page():
         
     # Page title / header
     with ui.column().classes("items-center mt-10"):
-        ui.label("Welcome to Propelyu Properties 🗝️🏘️").classes(
-            "text-5xl font-bold text-blue-700 mb-6"
+        ui.label("Welcome to Propel Properties").classes(
+            "text-5xl font-bold text-blue-700 mb-6 text-center"
         )
 
     # Card container for the form

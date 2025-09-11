@@ -3,8 +3,8 @@ from nicegui import ui
 
 def show_edit_event_page():
     # Page Header
-    with ui.column().classes("items-center mt-10"):
-        ui.label("Make your edits below⬇️ ").classes(
+    with ui.column().classes("items-center mt-10 text-center"):
+        ui.label("Make your edits below").classes(
             "text-5xl font-bold text-blue-700 mb-6"
         )
 
