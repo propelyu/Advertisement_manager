@@ -1,6 +1,6 @@
 from nicegui import ui
 import requests
-from utils.api import base
+from utils.api import base_url
 
 # Optional: if your images are local, serve assets
 # from nicegui import app
