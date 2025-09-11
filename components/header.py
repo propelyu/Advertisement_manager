@@ -3,8 +3,8 @@ from pages.home import show_home_page as home_page
 
 
 def show_header():
-    with ui.header().classes('bg-black text-white p-4 flex justify-between items-center shadow-lg'):
-        ui.label("✨ Propel Properties").classes('text-lg font-bold')
+    with ui.header().classes(''):
+        ui.label("").classes('')
 
         with ui.row().classes('space-x-6'):
             ui.link("Home", "/home").classes('text-white font-boldhover:text-pink-400')
