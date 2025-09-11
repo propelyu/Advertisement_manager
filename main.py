@@ -5,6 +5,7 @@ from pages.add_events import show_add_event_page
 from pages.home import show_home_page
 from components.header import show_header
 
+
 app.add_static_files("/assets", "assets")
 
 
