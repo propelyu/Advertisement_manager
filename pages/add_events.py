@@ -2,8 +2,8 @@ from nicegui import ui
 import requests
 from utils.api import base_url
 
-def post_advert(data):
-    response = requests.post(f"{base_url}/adverts", data)
+def post_advert(data,files):
+    response = requests.post(f"{base_url}/adverts", data=data, files=files) 
     print(response.json())
 
 def show_add_event_page():
@@ -44,8 +44,8 @@ def show_add_event_page():
         ui.button("Post Advert", on_click=lambda:post_advert({
             "title": title.value,"category": category.value, 
             "description":description.value,
-            "price":price.value, 
-            "image":image_content
+            "price":price.value}, 
+            files={"image":image_content
             }), color="blue-700").classes(
             "text-white px-6 py-3 rounded-lg w-full font-semibold hover:bg-blue-800 transition"
         )
