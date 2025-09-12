@@ -38,7 +38,7 @@ def show_view_events_page():
                     with ui.element('div').classes('flex flex-col justify-center items-start gap-4'):
                         ui.label(prop['title']).classes('text-3xl font-bold text-gray-800')
                         # ui.label(prop['location']).classes('text-lg text-gray-600')
-                        ui.label(prop['price']).classes('text-2xl text-green-600 font-semibold')
+                        ui.label(f"GHS {prop['price']}").classes('text-2xl text-green-600 font-semibold')
 
                         # Action Buttons
                         with ui.row().classes('gap-4 mt-4'):

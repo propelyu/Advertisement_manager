@@ -77,43 +77,4 @@ def show_home_page():
                         with ui.element('div').classes('p-4 text-left'):
                             ui.label(prop['title']).classes('text-xl font-bold text-left')
                             with ui.row().classes('items-center justify-between w-full'):
-                                ui.label(prop['price']).classes('text-lg text-green-600 font-semibold text-left')
-
-@ui.page('/property/{prop_id}')
-def property_view(prop_id: str):
-    try:
-        idx = int(prop_id)
-        prop = properties[idx]
-    except Exception:
-        ui.label('Property not found').classes('text-red-600 text-xl p-6')
-        ui.link('Back to listings', '/').classes('text-blue-600 underline p-6')
-        return
-
-    with ui.element('section').classes('w-full py-10'):
-        with ui.element('div').classes('mx-auto max-w-5xl w-full px-6'):
-            with ui.element('div').classes('grid grid-cols-1 md:grid-cols-2 gap-10 items-start'):
-                with ui.element('div').classes('w-full md:pr-6'):
-                    ui.image(prop['image']).classes(
-                        'w-full h-auto rounded-xl shadow-md object-cover'
-                    ).props(f'alt="{prop["title"]}"')
-
-                with ui.element('div').classes('flex flex-col gap-3'):
-                    ui.label(prop['title']).classes('text-2xl md:text-3xl font-bold leading-snug text-left')
-                    with ui.element('div').classes('flex items-start gap-2 text-gray-700'):
-                        ui.icon('place').classes('text-gray-600')
-                        ui.label(prop['location']).classes('text-base whitespace-normal break-words text-left')
-                    with ui.element('div').classes('flex items-start gap-2 text-gray-700'):
-                        ui.icon('payments').classes('text-gray-600')
-                        ui.label(prop['price']).classes('text-base font-semibold text-left')
-
-                    # Buttons: Changed to black
-                    with ui.row().classes('gap-4 mt-4'):
-                        ui.button('Edit').classes(
-                            'bg-black text-white px-4 py-2 rounded-full hover:bg-gray-900'
-                        )
-                        ui.button('Delete').classes(
-                            'bg-black text-white px-4 py-2 rounded-full round hover:bg-gray-900'
-                        )
-                    
-                    ui.button('Back to Listings', on_click=lambda: ui.navigate.to('/')) \
-                        .classes('mt-4 rounded-full px-5 py-3 font-semibold bg-black text-white hover:bg-gray-900')
+                                ui.label(f"GHS {prop['price']}").classes('text-lg text-green-600 font-semibold text-left')
