@@ -42,5 +42,4 @@ def view_events_page():
     show_header()
     show_view_events_page()
 
-
 ui.run()

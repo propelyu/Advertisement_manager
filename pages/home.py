@@ -5,13 +5,29 @@ from utils.api import base_url
 # Sample property data
 properties = []
 
-# Hover zoom effect and card polish
+# Hover zoom effect and card polish (HOVER SECTION)
 ui.add_head_html('''
 <style>
-.property-card { border-radius: 16px; overflow: hidden; background: #fff; transition: box-shadow .25s ease, transform .25s ease; }
-.property-card:hover { box-shadow: 0 12px 28px rgba(0,0,0,.16); transform: translateY(-2px); cursor: pointer; }
+/* Card hover animation */
+.property-card {
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+    transition: box-shadow .25s ease, transform .25s ease;
+}
+.property-card:hover {
+    box-shadow: 0 12px 28px rgba(0,0,0,.16);
+    transform: translateY(-2px);
+    cursor: pointer;
+}
+/* Image zoom hover effect */
 .property-image-wrap { position: relative; height: 16rem; overflow: hidden; }
-.property-image { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.0); transition: transform .5s ease; }
+.property-image {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    transform: scale(1.0);
+    transition: transform .5s ease;
+}
 .property-card:hover .property-image { transform: scale(1.06); }
 </style>
 ''')
@@ -20,7 +36,6 @@ ui.add_head_html('''
 def show_home_page():
     response = requests.get(f"{base_url}/adverts")
     json_data = response.json()
-    # print(json_data)
     properties = json_data["data"]
     
     ui.query('.nicegui-content').classes('m-0 p-0')
@@ -37,36 +52,31 @@ def show_home_page():
           .style('color: gold; text-shadow: 0 0 5px #FFD700, 0 0 10px #FFA500;')
         
     # Listing
-    with ui.element('section').classes('w-full py-12 bg-gray-50 '):
+    with ui.element('section').classes('w-full py-16'):
         with ui.element('div').classes('mx-auto max-w-7xl w-full px-6 '):
             ui.label('Featured Properties').classes('text-2xl font-bold mb-8 text-center')
 
             with ui.row().classes('w-full justify-center gap-8 flex-wrap'):
                 for idx, prop in enumerate(properties):
-                    # Make the card relative so the badge can be absolutely positioned on top-right
                     with ui.element('div').classes(
                         'property-card w-96 shadow-xl transition-shadow duration-300 relative hover:scale-105 rounded-2xl'
                     ).props('role=link tabindex=0 aria-label="View property"') as card:
                         card.on('click', lambda i=prop["id"]: ui.navigate.to(f'/view_event?id={i}'))
 
-                        # Category badge
                         if prop.get('category'):
                             ui.label(prop['category']).classes(
                                 'absolute top-2 right-2 z-10 text-xs bg-orange-100 text-orange-700 '
                                 'font-semibold px-2 py-1 rounded-full shadow-sm'
                             )
 
-                        # Image
                         with ui.element('div').classes('property-image-wrap'):
                             ui.element('img').classes('property-image').props(
                                 f'src="{prop["image_url"]}" alt="{prop["title"]}"'
                             )
 
-                        # Content
                         with ui.element('div').classes('p-4 text-left'):
                             ui.label(prop['title']).classes('text-xl font-bold text-left')
                             with ui.row().classes('items-center justify-between w-full'):
-                                # ui.label(prop['location']).classes('text-sm text-gray-500 text-left')
                                 ui.label(prop['price']).classes('text-lg text-green-600 font-semibold text-left')
 
 @ui.page('/property/{prop_id}')
@@ -83,8 +93,10 @@ def property_view(prop_id: str):
         with ui.element('div').classes('mx-auto max-w-5xl w-full px-6'):
             with ui.element('div').classes('grid grid-cols-1 md:grid-cols-2 gap-10 items-start'):
                 with ui.element('div').classes('w-full md:pr-6'):
-                    ui.image(prop['image']).classes('w-full h-auto rounded-xl shadow-md object-cover') \
-                        .props(f'alt="{prop["title"]}"')
+                    ui.image(prop['image']).classes(
+                        'w-full h-auto rounded-xl shadow-md object-cover'
+                    ).props(f'alt="{prop["title"]}"')
+
                 with ui.element('div').classes('flex flex-col gap-3'):
                     ui.label(prop['title']).classes('text-2xl md:text-3xl font-bold leading-snug text-left')
                     with ui.element('div').classes('flex items-start gap-2 text-gray-700'):
@@ -93,8 +105,15 @@ def property_view(prop_id: str):
                     with ui.element('div').classes('flex items-start gap-2 text-gray-700'):
                         ui.icon('payments').classes('text-gray-600')
                         ui.label(prop['price']).classes('text-base font-semibold text-left')
-                    ui.button('Back to Listings', on_click=lambda: ui.navigate.to('/')) \
-                        .classes('mt-4 rounded-full px-5 py-3 font-semibold') \
-                        .props('color=grey-7 text-color=white push')
 
-ui.run()
+                    # Buttons: Changed to black
+                    with ui.row().classes('gap-4 mt-4'):
+                        ui.button('Edit').classes(
+                            'bg-black text-white px-4 py-2 rounded-full hover:bg-gray-900'
+                        )
+                        ui.button('Delete').classes(
+                            'bg-black text-white px-4 py-2 rounded-full round hover:bg-gray-900'
+                        )
+                    
+                    ui.button('Back to Listings', on_click=lambda: ui.navigate.to('/')) \
+                        .classes('mt-4 rounded-full px-5 py-3 font-semibold bg-black text-white hover:bg-gray-900')

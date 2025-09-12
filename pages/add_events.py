@@ -16,15 +16,16 @@ def show_add_event_page():
         
     # Page title / header
     with ui.column().classes("items-center mt-10"):
-        ui.label("Welcome to Propel Properties").classes(
-            "text-5xl font-bold text-blue-700 mb-6 text-center"
-        )
+        pass  # Add this to avoid indentation error if block is empty
+        # ui.label("Welcome to Propel Properties").classes(
+        #     "text-4xl font-bold text-black-700 mb-6 text-center"
+        # )
 
     # Card container for the form
     with ui.card().classes(
         "w-full max-w-2xl mx-auto my-10 bg-white shadow-2xl rounded-2xl p-8"
     ):
-        ui.label("Post an Advert").classes("text-2xl font-bold text-blue-700 mb-6")
+        ui.label("Post an Advert").classes("text-2xl font-bold text-black-700 mb-6")
 
         # Form fields
         title = ui.input("Title").classes("w-full mb-4")
@@ -46,6 +47,6 @@ def show_add_event_page():
             "description":description.value,
             "price":price.value, 
             "image":image_content
-            }), color="blue-700").classes(
-            "text-white px-6 py-3 rounded-lg w-full font-semibold hover:bg-blue-800 transition"
+            }), color="black-700").classes(
+            "bg-black text-white px-6 py-3 rounded-lg w-full font-semibold hover:bg-gray-900 transition"
         )

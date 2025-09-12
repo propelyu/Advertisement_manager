@@ -11,9 +11,9 @@ def show_header():
             # Brand / Logo
             with ui.element("div").classes('flex flex-row gap-2 ml-4'):
                 ui.html("PROPEL").classes(
-        "text-stone font-bold text-3xl text-white uppercase"
+        "text-stone font-bold text-3xl text-amber-400 uppercase"
     ).style('font-family: "Story Script", sans-serif')
-                # ui.icon("home").classes("text-amber-400 w-8 h-8") 
+                # ui.icon("home").classes("text-amber-400 w-10 h-10")
 
 
 
@@ -26,9 +26,9 @@ def show_header():
                 ui.link("Add Event", "/add_event").classes(
                     "text-amber-400 text-lg hover:text-orange-500 transition-colors uppercase no-underline "
                 )
-                ui.link("View Event", "/view_event").classes(
-                    "text-amber-400 text-lg hover:text-orange-500 transition-colors uppercase no-underline "
-                )
+                # ui.link("View Event", "/view_event").classes(
+                #     "text-amber-400 text-lg hover:text-orange-500 transition-colors uppercase no-underline "
+                # )
                 ui.link("Edit Event", "/edit_event").classes(
                     "text-amber-400 text-lg hover:text-orange-500 transition-colors uppercase no-underline "
                 )
