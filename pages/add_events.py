@@ -37,7 +37,7 @@ def show_add_event_page():
 
         description = ui.textarea("Description").classes("w-full mb-6")
 
-        price = ui.input("Price").props("type=number").classes("w-full mb-4")
+        price = ui.input(" GHC Price").props("type=number").classes("w-full mb-4")
         
         image = ui.upload(on_upload=handle_image_upload).props("flat bordered").classes("w-full").style("border:2px")
 
