@@ -1,10 +1,11 @@
 from nicegui import ui
 from components.header import show_header
 
-
+@ui.page("/edit_event")
 def show_edit_event_page():
-    # Page Header
-    with ui.column().classes("items-center mt-10 text-center"):
+     show_header()
+
+     with ui.column().classes("items-center mt-10 text-center"):
         # ui.label("Make your edits below").classes(
         #     "text-5xl font-bold text-black-700 mb-6"
         # )
@@ -20,7 +21,7 @@ def show_edit_event_page():
             )   
 
     # Card container
-    with ui.card().classes(
+     with ui.card().classes(
         "w-full max-w-2xl mx-auto my-10 bg-white shadow-2xl rounded-2xl p-8"
     ):
         ui.label("Edit an Advert").classes("text-2xl font-bold text-black mb-6")
