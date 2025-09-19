@@ -1,6 +1,11 @@
 from nicegui import ui
+from components.header import show_header
 import requests
 from utils.api import base_url
+
+@ui.page("/view_events")
+def show_view_events_page():
+    show_header()
 
 # Delete function
 def delete_property(id: str):

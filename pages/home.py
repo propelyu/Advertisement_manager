@@ -1,18 +1,26 @@
 from nicegui import ui
+from components.header import show_header
 import requests
 from utils.api import base_url
 
-# Sample property data
+
+@ui.page("/")
+def show_home_page():
+    ui.query('.nicegui-content').classes('m-0 p-0')
+    show_header()
+
 properties = []
+
 
 
 @ui.page('/')
 def show_home_page():
+    show_header
     response = requests.get(f"{base_url}/adverts")
     json_data = response.json()
     properties = json_data["data"]
     
-    ui.query('.nicegui-content').classes('m-0 p-0')
+    
 
     # Hero
     with ui.element('section') \
@@ -26,8 +34,11 @@ def show_home_page():
           .style('color: gold; text-shadow: 0 0 5px #FFD700, 0 0 10px #FFA500;')
         
     # Listing
-    ui.label('Featured Properties').classes('text-2xl font-bold mb-8 text-center')
-    with ui.element('div').classes("grid grid-cols-1 md:grid-cols-3 cursor-pointer gap-8  mx-auto w-[80%] "):
+    with ui.element('section').classes('w-full py-16'):
+        with ui.element('div').classes('mx-auto max-w-7xl w-full px-6 '):
+            ui.label('Featured Properties').classes('text-2xl font-bold mb-8 text-center')
+
+            with ui.row().classes('w-full justify-center gap-8 flex-wrap'):
                 for idx, prop in enumerate(properties):
                     with ui.card().classes(' h-80 flex flex-col items-center justify-center'
                     ) as card:
@@ -44,7 +55,7 @@ def show_home_page():
                                 f'src="{prop["image_url"]}" alt="{prop["title"]}"'
                             )
 
-                        with ui.element('div').classes('p-4 text-left'):
+                        with ui.element('div').classes('p- text-left'):
                             ui.label(prop['title']).classes('text-xl font-bold text-left')
                             with ui.row().classes('items-center justify-between w-full'):
                                 ui.label(f"GHS {prop['price']}").classes('text-lg text-green-600 font-semibold text-left')

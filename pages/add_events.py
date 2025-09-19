@@ -1,7 +1,9 @@
 from nicegui import ui
+from components.header import show_header
 import requests
 from utils.api import base_url
 
+        
 def post_advert(data,files):
     response = requests.post(f"{base_url}/adverts", data=data, files=files) 
     print(response.json())
@@ -12,6 +14,13 @@ def show_add_event_page():
     def handle_image_upload(e):
         nonlocal image_content
         image_content = e.content
+
+
+@ui.page('/add_events')
+def show_add_events():
+    show_header           
+
+
         
         
     # Page title / header
