@@ -1,30 +1,35 @@
 from nicegui import ui
 from components.sidebar import show_sidebar
 
-adverts = []
+adverts = [
+    {"id": 1, "title": "Modern Apartment", "price": 1200, "category": "Apartment"},
+    {"id": 2, "title": "Luxury Villa", "price": 4500, "category": "Villa"},
+    {
+        "id": 3,
+        "title": "Office Space Downtown",
+        "price": 2000,
+        "category": "Office Space",
+    },
+    {"id": 4, "title": "Event Center Hall", "price": 1500, "category": "Event Center"},
+    {"id": 5, "title": "Cozy Studio", "price": 800, "category": "Apartment"},
+]
 
 
-@ui.page("/vendor/dashboard")
-def show_vendor_dashboard():
+@ui.page("/vendor/my_events")
+def show_vendor_events():
     ui.query(".nicegui-row").classes("flex-nowrap")
-    with ui.row().classes("w-full h-screen flex flex-row justify-between items-center"):
-        with ui.column().classes("w-[20%] h-full"):
+    with ui.row().classes("w-full"):
+        with ui.column().classes("w-[20%]"):
             show_sidebar()
         with ui.column().classes("w-[80%] h-full px-10 py-5"):
             # ui.label("dashboard content goes here")
             with ui.element("div").classes(
                 "w-full h-full flex justify-center items-center"
             ):
-                with ui.row().classes("w-full gap-6"):
-                    with ui.card().classes("w-1/3 p-4"):
-                        ui.label("Total Adverts").classes("text-lg text-gray-600")
-                        ui.label("12").classes("text-3xl font-bold")
-                    with ui.card().classes("w-1/3 p-4"):
-                        ui.label("Categories").classes("text-lg text-gray-600")
-                        ui.label("5").classes("text-3xl font-bold")
-                    with ui.card().classes("w-1/3 p-4"):
-                        ui.label("Total Views").classes("text-lg text-gray-600")
-                        ui.label("2,340").classes("text-3xl font-bold")
+                with ui.row().classes("flex flex-col  items-center w-full"):
+                    ui.label("Your Adverts").classes(
+                        "text-2xl font-semibold mb-4 items-center"
+                    )
                 with ui.grid(rows=3, columns=3).classes(
                     "cursor-pointer w-full gap-5 items-center"
                 ):
@@ -48,16 +53,16 @@ def show_vendor_dashboard():
                                     on_click=lambda a=advert: ui.navigate.to(
                                         f'/edit_event?id={a["id"]}'
                                     ),
-                                ).classes("bg-yellow-500 text-white flex-1 w-1/3")
+                                ).classes(
+                                    "bg-yellow-500 text-white pink-500 flex-1 w-1/3"
+                                )
 
                                 ui.button(
                                     "🗑️",
                                     on_click=lambda a=advert: ui.notify(
                                         f"Deleted {a['title']}"
                                     ),
-                                ).classes("bg-red-600 text-white flex-1 w-1/3")
-                with ui.row().classes(" bg-black items-center "):
-                    ui.button(
-                        "Load All Adverts",
-                        on_click=lambda: ui.navigate.to("/add_events"),
-                    ).classes("w-1/4 bg-black rounded text-white mb-8")
+                                ).classes("bg-red-600 pink-500 text-white flex-1 w-1/3")
+    ui.button(
+        "➕ Post New Advert", on_click=lambda: ui.navigate.to("/vendor/add_events")
+    ).classes("w-full max-w-xs mx-auto bg-black text-white mb-8")
