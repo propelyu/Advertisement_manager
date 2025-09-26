@@ -17,7 +17,8 @@ async def _login_user(data):
     if response.status_code == 200:
         json_data = response.json()
         app.storage.user["access_token"] = json_data["access_token"]
-        ui.navigate.back()
+        if json_data["role"] == "vendor":
+            return ui.navigate.to("/vendor/dashboard")
     print(response.status_code, response.content)
 
 

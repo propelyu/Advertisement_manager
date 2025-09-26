@@ -30,6 +30,7 @@ async def _create_event(data, files):
 
 @ui.page("/vendor/add_events")
 def show_add_event_page():
+    ui.query(".nicegui-row").classes("flex-nowrap")
     global _create_event_btn
     image_content = None
 
@@ -43,64 +44,71 @@ def show_add_event_page():
         with ui.column().classes(
             "w-[80%] flex justify-center items-start p-10 overflow-y-auto"
         ):
-            # Card container for the form
-            with ui.card().classes(
-                "w-full max-w-2xl mx-auto my-10 bg-white shadow-2xl rounded-2xl pl-8"
-            ):
-                ui.label("Post an Advert").classes(
-                    "text-2xl font-bold text-black-700 mb-6"
-                )
+            with ui.element("div").classes("w-full h-full flex flex-row "):
+                with ui.row().classes("flex flex-col  items-center w-full"):
 
-                # Form fields
-                title = (
-                    ui.select(
-                        [
-                            "Apartment",
-                            "Villa",
-                            "Office Space",
-                            "Event center",
-                            "Others",
-                        ],
-                        label="Title",
-                    )
-                    .classes("w-full ")
-                    .props("outlined")
-                )
+                    # Card container for the form
+                    with ui.card().classes(
+                        "w-full max-w-2xl mx-auto my-10 bg-gray shadow-2xl rounded-2xl pl-8"
+                    ):
+                        ui.label("Post an Advert").classes(
+                            "text-2xl font-bold text-black-700 mb-6"
+                        )
 
-                category = (
-                    ui.select(
-                        ["A", "B", "C"],
-                        label="Category",
-                    )
-                    .props("outlined")
-                    .classes("w-full")
-                )
-                description = ui.textarea("Description").classes("w-full")
+                        # Form fields
+                        title = (
+                            ui.select(
+                                [
+                                    "Apartment",
+                                    "Villa",
+                                    "Office Space",
+                                    "Event center",
+                                    "Others",
+                                ],
+                                label="Title",
+                            )
+                            .classes("w-full ")
+                            .props("outlined")
+                        )
 
-                price = ui.input("GH¢ ").props("type=number").classes("w-full")
-                location = ui.textarea("location").classes("w-full")
+                        category = (
+                            ui.select(
+                                [
+                                    "High demand (A)",
+                                    "Medium demand (B)",
+                                    "Low demand (C)",
+                                ],
+                                label="Category",
+                            )
+                            .props("outlined")
+                            .classes("w-full")
+                        )
+                        description = ui.textarea("Description").classes("w-full")
 
-                image = (
-                    ui.upload(on_upload=handle_image_upload)
-                    .props("flat bordered ")
-                    .classes("w-full ")
-                    .style("border:2px ")
-                )
+                        price = ui.input("GH¢ ").props("type=number").classes("w-full")
+                        location = ui.textarea("location").classes("w-full")
 
-                # Submit button
-                _create_event_btn = ui.button(
-                    "Post Advert",
-                    on_click=lambda: _create_event(
-                        {
-                            "title": title.value,
-                            "category": category.value,
-                            "description": description.value,
-                            "price": price.value,
-                            "location": location.value,
-                        },
-                        files={"image": image_content},
-                    ),
-                    color="black",
-                ).classes(
-                    "text-white px-6 py-3 rounded-lg w-full font-semibold hover:bg-blue-800 transition"
-                )
+                        image = (
+                            ui.upload(on_upload=handle_image_upload)
+                            .props("flat bordered ")
+                            .classes("w-full ")
+                            .style("border:2px")
+                        )
+
+                        # Submit button
+                        _create_event_btn = ui.button(
+                            "Post Advert",
+                            on_click=lambda: _create_event(
+                                {
+                                    "title": title.value,
+                                    "category": category.value,
+                                    "description": description.value,
+                                    "price": price.value,
+                                    "location": location.value,
+                                },
+                                files={"image": image_content},
+                            ),
+                            color="black",
+                        ).classes(
+                            "text-white px-6 py-3 rounded-lg w-full font-semibold hover:bg-blue-800 transition"
+                        )

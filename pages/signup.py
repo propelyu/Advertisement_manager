@@ -25,11 +25,9 @@ async def _signup(data):
 def show_signup_page():
     show_header()
     with ui.column().classes(
-        "min-h-screen w-full items-center bg-[url(/assets/lux-estate.jpg)]  justify-center p-0 bg-cover rounded-lg"
+        "min-h-screen w-full items-center bg-gray-100   justify-center p-0 bg-cover rounded-lg"
     ):
-        with ui.column().classes(
-            "w-full max-w-xl p-8 bg-gray-100 shadow-lg rounded-xl"
-        ):
+        with ui.column().classes("w-full max-w-xl p-8 shadow-lg rounded-xl"):
             ui.label("Sign Up").classes(
                 "text-2xl font-bold mb-6 flex flex-row justify-center items-center"
             )
@@ -81,7 +79,7 @@ def show_signup_page():
                                     "email": email.value,
                                     "password": password.value,
                                     "confirm_password": confirm_password.value,
-                                    "role": "guest",
+                                    "role": "Guest",
                                 }
                             ),
                         ).classes("w-full text-white")
@@ -116,7 +114,7 @@ def show_signup_page():
                                     "email": email.value,
                                     "password": password.value,
                                     "confirm_password": confirm_password.value,
-                                    "role": "vendor",
+                                    "role": "Vendor",
                                 }
                             ),
                         ).classes("w-full")
